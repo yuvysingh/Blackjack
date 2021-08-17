@@ -1,3 +1,3 @@
 # Blacjack
 
-Blackjack game using Pygame
+Blackjack game with interface using Pygame
