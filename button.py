@@ -35,10 +35,13 @@ class Button:
             self.color = RED
 
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-                print("clicked")
                 self.clicked = True
+                print("CLICKED!")
                 return self.clicked
 
-        elif pygame.mouse.get_pressed()[0] == 0:
-            self.clicked = False
-            return self.clicked
+            elif pygame.mouse.get_pressed()[0] == 0:
+                self.clicked = False
+                return self.clicked
+
+        else:
+            self.color = MAGENTA_PINK

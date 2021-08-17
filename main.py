@@ -229,6 +229,29 @@ def blackjack():
 
                     stand_btn_active = False
 
+            elif player.worth < dealer.worth:
+
+                # Each loop we draw the screen
+                draw_screen(screen, POKER_GREEN)
+
+                # Draw the Cards every loop
+                dealer.display(screen, deck, 10, 50)
+                player.display(screen, deck, 10, 200)
+
+                # Draw the buttons
+                replay_button.draw(screen)
+
+                if replay_button.is_clicked():
+
+                    player.clear()
+                    dealer.clear()
+
+                    for x in range(2):
+                        player.add_card(deck)
+                        dealer.add_card(deck)
+
+                    stand_btn_active = False
+
         else:
 
             # Each loop we draw the screen
