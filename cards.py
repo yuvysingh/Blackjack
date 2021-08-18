@@ -4,7 +4,7 @@ from pygame.image import load
 
 # Directory for the card images
 image_dir = (
-    "C:/Users/yuvme/OneDrive/vs code projects/python/pygame/blackjack/cardimages/"
+    "C:/sers/yuvme/OneDrive/vs code projects/python/pygame/blackjack/card_images"
 )
 
 # Define the different suits
