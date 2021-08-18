@@ -1,13 +1,17 @@
 import pygame
 from button import Button
-
 from cards import Card, Deck, Hand
-
 from pygame.locals import (
     K_ESCAPE,
     KEYDOWN,
     QUIT,
 )
+
+
+# Score
+# Main menu
+# Money input
+# Game over screen
 
 # Constants for the screen width and height
 SCREEN_WIDTH = 600
