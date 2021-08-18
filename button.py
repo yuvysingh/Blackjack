@@ -24,7 +24,7 @@ class Button:
     def draw(self, screen):
 
         # Draw the button on the screen
-        pygame.draw.rect(screen, self.color, self.rect)
+        pygame.draw.rect(screen, self.color, self.rect, border_radius=12)
         screen.blit(self.text_surf, self.text_rect)
 
     def is_clicked(self):

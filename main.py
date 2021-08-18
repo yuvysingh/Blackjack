@@ -42,11 +42,41 @@ def game_setup():
     clock = pygame.time.Clock()
 
     # Create the different buttons
-    hit_button = Button(" Hit+ ", (10, 350), 50, 20)
-    stand_button = Button(" Stand ", (70, 350), 50, 20)
-    replay_button = Button(" Replay ", (130, 350), 50, 20)
+    hit_button = Button(" Hit+ ", (10, 320), 100, 40)
+    stand_button = Button(" Stand ", (120, 320), 100, 40)
+    replay_button = Button(" Replay ", (220, 320), 100, 40)
 
     return screen, clock, hit_button, stand_button, replay_button
+
+
+def game_restart(player, dealer, deck):
+
+    player.clear()
+    dealer.clear()
+
+    for x in range(2):
+        player.add_card(deck)
+        dealer.add_card(deck)
+
+
+def draw_game(screen, player, dealer, deck):
+
+    # Each loop we draw the screen
+    draw_screen(screen, POKER_GREEN)
+
+    # Draw the Cards every loop
+    dealer.dealer_display(screen, deck, 10, 50)
+    player.display(screen, deck, 10, 200)
+
+
+def draw_game_over(screen, player, dealer, deck):
+
+    # Each loop we draw the screen
+    draw_screen(screen, POKER_GREEN)
+
+    # Draw the Cards every loop
+    dealer.display(screen, deck, 10, 50)
+    player.display(screen, deck, 10, 200)
 
 
 # Main game function
@@ -96,24 +126,14 @@ def blackjack():
 
         if player.is_bust():
 
-            # Each loop we draw the screen
-            draw_screen(screen, POKER_GREEN)
-
-            # Draw the Cards every loop
-            dealer.display(screen, deck, 10, 50)
-            player.display(screen, deck, 10, 200)
+            draw_game_over(screen, player, dealer, deck)
 
             # Draw the buttons
             replay_button.draw(screen)
 
             if replay_button.is_clicked():
 
-                player.clear()
-                dealer.clear()
-
-                for x in range(2):
-                    player.add_card(deck)
-                    dealer.add_card(deck)
+                game_restart(player, dealer, deck)
 
         elif hit_button.is_clicked():
 
@@ -121,33 +141,18 @@ def blackjack():
 
             if player.is_bust():
 
-                # Each loop we draw the screen
-                draw_screen(screen, POKER_GREEN)
-
-                # Draw the Cards every loop
-                dealer.display(screen, deck, 10, 50)
-                player.display(screen, deck, 10, 200)
+                draw_game_over(screen, player, dealer, deck)
 
                 # Draw the buttons
                 replay_button.draw(screen)
 
                 if replay_button.is_clicked():
 
-                    player.clear()
-                    dealer.clear()
-
-                    for x in range(2):
-                        player.add_card(deck)
-                        dealer.add_card(deck)
+                    game_restart(player, dealer, deck)
 
             else:
 
-                # Each loop we draw the screen
-                draw_screen(screen, POKER_GREEN)
-
-                # Draw the Cards every loop
-                dealer.dealer_display(screen, deck, 10, 50)
-                player.display(screen, deck, 10, 200)
+                draw_game(screen, player, dealer, deck)
 
                 # Draw the buttons
                 hit_button.draw(screen)
@@ -162,104 +167,59 @@ def blackjack():
 
             if dealer.is_bust():
 
-                # Each loop we draw the screen
-                draw_screen(screen, POKER_GREEN)
-
-                # Draw the Cards every loop
-                dealer.display(screen, deck, 10, 50)
-                player.display(screen, deck, 10, 200)
+                draw_game_over(screen, player, dealer, deck)
 
                 # Draw the buttons
                 replay_button.draw(screen)
 
                 if replay_button.is_clicked():
 
-                    player.clear()
-                    dealer.clear()
-
-                    for x in range(2):
-                        player.add_card(deck)
-                        dealer.add_card(deck)
+                    game_restart(player, dealer, deck)
 
                     stand_btn_active = False
 
             elif player.worth == dealer.worth:
 
-                # Each loop we draw the screen
-                draw_screen(screen, POKER_GREEN)
-
-                # Draw the Cards every loop
-                dealer.display(screen, deck, 10, 50)
-                player.display(screen, deck, 10, 200)
+                draw_game_over(screen, player, dealer, deck)
 
                 # Draw the buttons
                 replay_button.draw(screen)
 
                 if replay_button.is_clicked():
 
-                    player.clear()
-                    dealer.clear()
-
-                    for x in range(2):
-                        player.add_card(deck)
-                        dealer.add_card(deck)
+                    game_restart(player, dealer, deck)
 
                     stand_btn_active = False
 
             elif player.worth > dealer.worth:
 
-                # Each loop we draw the screen
-                draw_screen(screen, POKER_GREEN)
-
-                # Draw the Cards every loop
-                dealer.display(screen, deck, 10, 50)
-                player.display(screen, deck, 10, 200)
+                draw_game_over(screen, player, dealer, deck)
 
                 # Draw the buttons
                 replay_button.draw(screen)
 
                 if replay_button.is_clicked():
 
-                    player.clear()
-                    dealer.clear()
-
-                    for x in range(2):
-                        player.add_card(deck)
-                        dealer.add_card(deck)
+                    game_restart(player, dealer, deck)
 
                     stand_btn_active = False
 
             elif player.worth < dealer.worth:
 
-                # Each loop we draw the screen
-                draw_screen(screen, POKER_GREEN)
-
-                # Draw the Cards every loop
-                dealer.display(screen, deck, 10, 50)
-                player.display(screen, deck, 10, 200)
+                draw_game_over(screen, player, dealer, deck)
 
                 # Draw the buttons
                 replay_button.draw(screen)
 
                 if replay_button.is_clicked():
 
-                    player.clear()
-                    dealer.clear()
-
-                    for x in range(2):
-                        player.add_card(deck)
-                        dealer.add_card(deck)
+                    game_restart(player, dealer, deck)
 
                     stand_btn_active = False
 
         else:
 
-            # Each loop we draw the screen
-            draw_screen(screen, POKER_GREEN)
-
-            # Draw the Cards every loop
-            dealer.dealer_display(screen, deck, 10, 50)
-            player.display(screen, deck, 10, 200)
+            draw_game(screen, player, dealer, deck)
 
             # Draw the buttons
             hit_button.draw(screen)
