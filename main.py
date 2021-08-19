@@ -1,6 +1,6 @@
 import pygame
 from button import Button
-from cards import Card, Deck, Hand
+from cards import Deck, Hand
 from pygame.locals import (
     K_ESCAPE,
     KEYDOWN,

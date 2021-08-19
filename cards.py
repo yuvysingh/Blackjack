@@ -1,14 +1,15 @@
 # Import random to shuffle the deck list
 from random import shuffle
 from pygame.image import load
+from pygame.transform import scale
 
 # Directory for the card images
 image_dir = (
-    "C:/users/yuvme/OneDrive/vs code projects/python/pygame/blackjack/card_images/"
+    "C:/users/yuvme/OneDrive/vs code projects/python/pygame/blackjack/deck_of_cards/"
 )
 
 # Define the different suits
-suits = ("H", "D", "S", "C")
+suits = "CDHS"
 
 # Define the different ranks
 ranks = (
@@ -135,10 +136,12 @@ class Hand:
 
         for card in self.cards:
             card_img = load(deck.card_images[card.ref]).convert()
+
             screen.blit(card_img, (x, y))
             x += 50
 
     def dealer_display(self, screen, deck, x, y):
 
         card_img = load(deck.card_images[self.cards[0].ref]).convert()
+
         screen.blit(card_img, (x, y))
