@@ -10,7 +10,6 @@ from pygame.locals import (
 
 # Score
 # Main menu
-# Money input
 # Game over screen
 
 # Constants for the screen width and height
@@ -50,7 +49,9 @@ def game_setup():
     stand_button = Button(" Stand ", (120, 320), 100, 40)
     replay_button = Button(" Replay ", (220, 320), 100, 40)
 
-    return screen, clock, hit_button, stand_button, replay_button
+    score = Button(" Dealer: 0,player: 0 ", (340, 320), 250, 40)
+
+    return (screen, clock, hit_button, stand_button, replay_button, score)
 
 
 def game_restart(player, dealer, deck):
@@ -63,7 +64,7 @@ def game_restart(player, dealer, deck):
         dealer.add_card(deck)
 
 
-def draw_game(screen, player, dealer, deck):
+def draw_game(screen, player, dealer, deck, score):
 
     # Each loop we draw the screen
     draw_screen(screen, POKER_GREEN)
@@ -72,8 +73,10 @@ def draw_game(screen, player, dealer, deck):
     dealer.dealer_display(screen, deck, 10, 50)
     player.display(screen, deck, 10, 200)
 
+    score.draw(screen)
 
-def draw_game_over(screen, player, dealer, deck):
+
+def draw_game_over(screen, player, dealer, deck, score):
 
     # Each loop we draw the screen
     draw_screen(screen, POKER_GREEN)
@@ -82,13 +85,21 @@ def draw_game_over(screen, player, dealer, deck):
     dealer.display(screen, deck, 10, 50)
     player.display(screen, deck, 10, 200)
 
+    score.draw(screen)
+
+
+def score_update(score, screen, dealer, player):
+
+    score.score_update(f" Dealer: {dealer.score},Player: {player.score} ")
+    score.draw(screen)
+
 
 # Main game function
 def blackjack():
 
     stand_btn_active = False
 
-    (screen, clock, hit_button, stand_button, replay_button) = game_setup()
+    (screen, clock, hit_button, stand_button, replay_button, score) = game_setup()
 
     # Create & shuffle the deck, deal two cards to each player
     deck = Deck()
@@ -130,12 +141,16 @@ def blackjack():
 
         if player.is_bust():
 
-            draw_game_over(screen, player, dealer, deck)
+            draw_game_over(screen, player, dealer, deck, score)
 
             # Draw the buttons
             replay_button.draw(screen)
 
             if replay_button.is_clicked():
+
+                dealer.score += 1
+
+                score_update(score, screen, dealer, player)
 
                 game_restart(player, dealer, deck)
 
@@ -145,18 +160,22 @@ def blackjack():
 
             if player.is_bust():
 
-                draw_game_over(screen, player, dealer, deck)
+                draw_game_over(screen, player, dealer, deck, score)
 
                 # Draw the buttons
                 replay_button.draw(screen)
 
                 if replay_button.is_clicked():
 
+                    score_update(score, screen, dealer, player)
+
+                    dealer.score += 1
+
                     game_restart(player, dealer, deck)
 
             else:
 
-                draw_game(screen, player, dealer, deck)
+                draw_game(screen, player, dealer, deck, score)
 
                 # Draw the buttons
                 hit_button.draw(screen)
@@ -171,12 +190,16 @@ def blackjack():
 
             if dealer.is_bust():
 
-                draw_game_over(screen, player, dealer, deck)
+                draw_game_over(screen, player, dealer, deck, score)
 
                 # Draw the buttons
                 replay_button.draw(screen)
 
                 if replay_button.is_clicked():
+
+                    player.score += 1
+
+                    score_update(score, screen, dealer, player)
 
                     game_restart(player, dealer, deck)
 
@@ -184,7 +207,7 @@ def blackjack():
 
             elif player.worth == dealer.worth:
 
-                draw_game_over(screen, player, dealer, deck)
+                draw_game_over(screen, player, dealer, deck, score)
 
                 # Draw the buttons
                 replay_button.draw(screen)
@@ -197,12 +220,15 @@ def blackjack():
 
             elif player.worth > dealer.worth:
 
-                draw_game_over(screen, player, dealer, deck)
+                draw_game_over(screen, player, dealer, deck, score)
 
                 # Draw the buttons
                 replay_button.draw(screen)
 
                 if replay_button.is_clicked():
+
+                    player.score += 1
+                    score_update(score, screen, dealer, player)
 
                     game_restart(player, dealer, deck)
 
@@ -210,12 +236,15 @@ def blackjack():
 
             elif player.worth < dealer.worth:
 
-                draw_game_over(screen, player, dealer, deck)
+                draw_game_over(screen, player, dealer, deck, score)
 
                 # Draw the buttons
                 replay_button.draw(screen)
 
                 if replay_button.is_clicked():
+
+                    dealer.score += 1
+                    score_update(score, screen, dealer, player)
 
                     game_restart(player, dealer, deck)
 
@@ -223,7 +252,7 @@ def blackjack():
 
         else:
 
-            draw_game(screen, player, dealer, deck)
+            draw_game(screen, player, dealer, deck, score)
 
             # Draw the buttons
             hit_button.draw(screen)

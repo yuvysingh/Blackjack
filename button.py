@@ -45,3 +45,7 @@ class Button:
 
         else:
             self.color = MAGENTA_PINK
+
+    def score_update(self, new_text):
+
+        self.text_surf = gui_font.render(new_text, True, WHITE)

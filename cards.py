@@ -111,6 +111,7 @@ class Hand:
     def __init__(self):
         self.cards = []  # start with an empty list as we did in the Deck class
         self.worth = 0  # The value of the players hand starts with zero value
+        self.score = 0
 
     # add card method to add cards to players hands
     def add_card(self, deck):
