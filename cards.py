@@ -5,7 +5,7 @@ from pygame.transform import scale
 
 # Directory for the card images
 image_dir = (
-    "C:/users/yuvme/OneDrive/vs code projects/python/pygame/blackjack/deck_of_cards/"
+    "/Users/yuvysingh/vs code/balckajack/Blackjack/deck_of_cards/"
 )
 
 # Define the different suits
@@ -125,6 +125,7 @@ class Hand:
         # Clears the cards in the players inventory
         self.cards.clear()
         self.worth = 0
+        
 
     def is_bust(self):
 

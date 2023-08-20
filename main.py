@@ -145,6 +145,7 @@ def blackjack():
 
             # Draw the buttons
             replay_button.draw(screen)
+            pygame.display.update()
 
             if replay_button.is_clicked():
 
@@ -153,6 +154,7 @@ def blackjack():
                 score_update(score, screen, dealer, player)
 
                 game_restart(player, dealer, deck)
+                pygame.display.update()
 
         elif hit_button.is_clicked():
 
@@ -164,14 +166,14 @@ def blackjack():
 
                 # Draw the buttons
                 replay_button.draw(screen)
+                pygame.display.update()
 
                 if replay_button.is_clicked():
-
+                    dealer.score += 1
                     score_update(score, screen, dealer, player)
 
-                    dealer.score += 1
-
                     game_restart(player, dealer, deck)
+                    pygame.display.update()
 
             else:
 
@@ -180,12 +182,13 @@ def blackjack():
                 # Draw the buttons
                 hit_button.draw(screen)
                 stand_button.draw(screen)
+                pygame.display.update()
 
         elif stand_button.is_clicked() or stand_btn_active or player.worth == 21:
 
             stand_btn_active = True
 
-            while dealer.worth < 17:
+            while dealer.worth < player.worth:
                 dealer.add_card(deck)
 
             if dealer.is_bust():
@@ -194,6 +197,7 @@ def blackjack():
 
                 # Draw the buttons
                 replay_button.draw(screen)
+                pygame.display.update()
 
                 if replay_button.is_clicked():
 
@@ -202,6 +206,7 @@ def blackjack():
                     score_update(score, screen, dealer, player)
 
                     game_restart(player, dealer, deck)
+                    pygame.display.update()
 
                     stand_btn_active = False
 
@@ -211,11 +216,12 @@ def blackjack():
 
                 # Draw the buttons
                 replay_button.draw(screen)
+                pygame.display.update()
 
                 if replay_button.is_clicked():
 
                     game_restart(player, dealer, deck)
-
+                    pygame.display.update()
                     stand_btn_active = False
 
             elif player.worth > dealer.worth:
@@ -224,6 +230,7 @@ def blackjack():
 
                 # Draw the buttons
                 replay_button.draw(screen)
+                pygame.display.update()
 
                 if replay_button.is_clicked():
 
@@ -231,6 +238,7 @@ def blackjack():
                     score_update(score, screen, dealer, player)
 
                     game_restart(player, dealer, deck)
+                    pygame.display.update()
 
                     stand_btn_active = False
 
@@ -240,6 +248,7 @@ def blackjack():
 
                 # Draw the buttons
                 replay_button.draw(screen)
+                pygame.display.update()
 
                 if replay_button.is_clicked():
 
@@ -247,6 +256,7 @@ def blackjack():
                     score_update(score, screen, dealer, player)
 
                     game_restart(player, dealer, deck)
+                    pygame.display.update()
 
                     stand_btn_active = False
 
@@ -257,6 +267,7 @@ def blackjack():
             # Draw the buttons
             hit_button.draw(screen)
             stand_button.draw(screen)
+            pygame.display.update()
 
         pygame.display.update()
 
